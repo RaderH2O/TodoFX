@@ -30,11 +30,17 @@ public class TodoController {
     }
 
     public void addTodo() {
+
+        addTodo(todo.getText());
+    }
+
+    public void addTodo(String todoText) {
+
         CheckBox todoBox = new CheckBox();
 
         VBox.setMargin(todoBox, new Insets(0, 0, 10, 0));
 
-        todoBox.setText(todo.getText());
+        todoBox.setText(todoText);
         todoBox.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -76,11 +82,8 @@ public class TodoController {
                 if ((char) characterRead != '\n') {
                     line += Character.toString((char) characterRead);
                 } else if (line.length() > 4) {
-                    CheckBox todoObject = new CheckBox(line.substring(5));
 
-                    todos.add(todoObject);
-                    todoList.getChildren().add(todoObject);
-
+                    addTodo(line.substring(5));
                     line = "";
                 }
             }
